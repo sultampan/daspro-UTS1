@@ -1,62 +1,53 @@
 import java.util.Scanner;
 
 public class nilaisiswa22 {
-
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+       
+        Scanner sc22 = new Scanner(System.in);
 
-        int jumlahSiswa = 0;
-        int jumlahDiatasRataRata = 0;
-        int jumlahDibawahRataRata = 0;
-        double totalNilai = 0;
-        double RataRata = 0;
+int totalSiswa = 0, atasMean = 0, bawahMean = 0;
+double nilai = 0, totalNilai = 0, meanAkhir;
+String nama;
+boolean mayoritasNilai;
 
-        while (true) {
-            System.out.println("Masukkan nama siswa (atau ketik 'selesai' untuk berhenti): ");
-            String nama = input.nextLine();
+while (true) {
+    System.out.println("Silahkan Ketik 'Selesai' untuk berhenti");
+    System.out.print("Masukkan nama siswa: ");
+    nama = sc22.nextLine();
 
-            if (nama.equalsIgnoreCase("selesai")) {
-                break;
-            }
+    if (nama.equalsIgnoreCase("selesai")) {
+        break;
+    }
 
-            System.out.println("Masukkan Nilai Siswa: ");
-            double nilai = input.nextDouble();
-            input.nextLine(); // Mengatasi newline setelah nextDouble
+    System.out.print("Masukkan nilai siswa: ");
+    nilai = sc22.nextDouble();
+    sc22.nextLine();
 
-            totalNilai += nilai;
-            jumlahSiswa++;
-
-            RataRata = totalNilai / jumlahSiswa;
-
-            if (nilai > RataRata) {
-                jumlahDiatasRataRata++;
-            } else if (nilai < RataRata) {
-                jumlahDibawahRataRata++;
-            }
-        }
-
-        if (jumlahSiswa == 0) {
-            System.out.println("Tidak ada data siswa yang dimasukkan.");
-            return;
-        }
-
-        if (RataRata < 75) {
-            System.out.println("Rata-rata nilai kelas: " + RataRata);
-            System.out.println("Jumlah siswa yang mendapatkan nilai di atas rata-rata: " + jumlahDiatasRataRata);
-            System.out.println("Jumlah siswa yang mendapatkan nilai di bawah rata-rata: " + jumlahDibawahRataRata);
-
-            boolean mayoritasDiatasRataRata = jumlahDiatasRataRata > (jumlahSiswa / 2);
-
-            if (mayoritasDiatasRataRata) {
-                System.out.println("Mayoritas siswa memiliki nilai di atas rata-rata.");
-            } else {
-                System.out.println("Mayoritas siswa tidak memiliki nilai di atas rata-rata.");
-            }
-
+    totalSiswa ++;
+    totalNilai += nilai;
+   
+        if (nilai >= 75) {
+            atasMean++;
         } else {
-            System.out.println("Rata-rata nilai kelas adalah " + RataRata + ", yang lebih dari 75.");
+            bawahMean++;
         }
+    } 
 
-        input.close();
+    if (totalSiswa > 0) {
+        meanAkhir = totalNilai / totalSiswa;
+
+    mayoritasNilai = atasMean > (totalSiswa / 2.0);
+
+System.out.println("-------------------------------------");
+System.out.println("-------Laporan Penilaian Kelas-------");
+System.out.println("-------------------------------------");
+System.out.println("Rata-rata Nilai Kelas: " + meanAkhir);
+System.out.println("Jumlah Siswa Memiliki Nilai di Atas Rata-rata: " + atasMean);
+System.out.println("Jumlah Siswa Memiliki Nilai di Bawah Rata-rata: " + bawahMean);
+System.out.println("Apakah Mayoritas Nilai Siswa di Atas Rata-rata? " + (mayoritasNilai ? "Ya" : "Tidak"));
+
+} else {
+    System.out.println("Tidak ada nilai yang dimasukkan.");
+}
     }
 }
